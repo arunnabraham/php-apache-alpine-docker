@@ -1,7 +1,8 @@
 FROM php:7.2-fpm-alpine
 
 RUN apk add --update \
-    wget \
+    	wget \
+		apache2 \
         php7-dev    \
 		$PHPIZE_DEPS \
 		freetype-dev \
@@ -38,4 +39,6 @@ RUN rm /usr/local/bin/install-php-extensions
 WORKDIR /var/www/html
 
 COPY ./app /var/www/html
+
+CMD ["php-fpm"]
 
