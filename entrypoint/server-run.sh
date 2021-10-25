@@ -1,2 +1,2 @@
 #!/bin/sh
-php-fpm --daemonize && httpd -g 'daemon off;'
+php-fpm --daemonize && httpd -k start

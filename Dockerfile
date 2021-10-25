@@ -34,11 +34,15 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 && mv composer.phar /usr/bin/composer
 
 
+COPY ./entrypoint/server-run.sh /usr/local/bin/server-run.sh
+
+RUN chmod +x /usr/local/bin/server-run.sh
+
 RUN rm /usr/local/bin/install-php-extensions
 
 WORKDIR /var/www/html
 
 COPY ./app /var/www/html
 
-CMD ["php-fpm"]
+CMD ["/usr/local/bin/server-run.sh"]
 
