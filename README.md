@@ -4,6 +4,12 @@ Setups for PHP Apache Alpine in Docker
 
 # Connecting other Host apps
 
-Connect to <host.containers.internal> (podman)
+Connect to <host.docker.internal> (docker)
 
-Connect to <host.docker.internal> (podman)
+Podman Run with container to host communication
+
+podman run --net slirp4netns:allow_host_loopback=true -p 8000:80 -it --rm php-apache-alpine:latest
+
+the loopback id 
+
+Connect to <host.containers.internal> (podman)

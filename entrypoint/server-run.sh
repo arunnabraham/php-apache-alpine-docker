@@ -1,2 +1,3 @@
 #!/bin/sh
-php-fpm --daemonize && httpd -k start
+httpd -k start
+php-fpm

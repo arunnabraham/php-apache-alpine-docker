@@ -3,6 +3,7 @@ FROM php:7.2-fpm-alpine
 RUN apk add --update \
     	wget \
 		apache2 \
+		apache2-proxy \
         php7-dev    \
 		$PHPIZE_DEPS \
 		freetype-dev \
@@ -35,14 +36,16 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 
 COPY ./entrypoint/server-run.sh /usr/local/bin/server-run.sh
+COPY ./apache-config/vhost.conf /etc/apache2/conf.d/vhosts/vhost.conf
+COPY ./apache-config/httpd.conf /etc/apache2/httpd.conf
 
 RUN chmod +x /usr/local/bin/server-run.sh
 
 RUN rm /usr/local/bin/install-php-extensions
 
-WORKDIR /var/www/html
+WORKDIR /var/www/localhost/htdocs
 
-COPY ./app /var/www/html
+COPY ./app ./
 
 CMD ["/usr/local/bin/server-run.sh"]
 
