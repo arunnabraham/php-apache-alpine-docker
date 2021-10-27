@@ -10,6 +10,6 @@ Podman Run with container to host communication
 
 podman run --net slirp4netns:allow_host_loopback=true -p 8000:80 -it --rm php-apache-alpine:latest
 
-the loopback id 
+the loopback adress to host
 
 Connect to <host.containers.internal> (podman)

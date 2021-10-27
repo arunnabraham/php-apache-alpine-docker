@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+    php:
+        restart: always
+        volumes:
+            - "./php-config/php.ini:/usr/local/etc/php/conf.d/custom.ini"
+            - "./app:/var/www/localhost/htdocs"
+        build:
+            context: .
+            dockerfile: Dockerfile
+            image: php-apache-alpine:latest
+        ports:
+            - "8000:80"
+            - "3000:443"
+    

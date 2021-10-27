@@ -29,23 +29,28 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions gd igbinary xdebug imagick pdo_pgsql pgsql mbstring pdo_mysql bcmath decimal opcache calendar redis sockets zip vips mysqli intl msgpack
 
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-&& php composer-setup.php \
-&& php -r "unlink('composer-setup.php');" \
-&& mv composer.phar /usr/bin/composer
-
-
 COPY ./entrypoint/server-run.sh /usr/local/bin/server-run.sh
 COPY ./apache-config/vhost.conf /etc/apache2/conf.d/vhosts/vhost.conf
 COPY ./apache-config/httpd.conf /etc/apache2/httpd.conf
 
-RUN chmod +x /usr/local/bin/server-run.sh
 
-RUN rm /usr/local/bin/install-php-extensions
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+&& php composer-setup.php \
+&& php -r "unlink('composer-setup.php');" \
+&& mv composer.phar /usr/bin/composer \
+&& chmod +x /usr/local/bin/server-run.sh \
+&& rm /usr/local/bin/install-php-extensions
+# && mkdir /var/www/localhost/htdocs/WiSeItCloud \
+# && cd /var/www/localhost/htdocs \
+# && find . -type d -exec chmod 0755 {} \; \
+# && find . -type f -exec chmod 0644 {} \;
+
+
+# COPY ./app /var/www/localhost/htdocs
 
 WORKDIR /var/www/localhost/htdocs
 
-COPY ./app ./
+# COPY ./app ./
 
 CMD ["/usr/local/bin/server-run.sh"]
 
