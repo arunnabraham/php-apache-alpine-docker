@@ -21,10 +21,17 @@ Ideal Run command for volume bidirectional with allowing host networking (For de
 Example:
 
 `podman run \`
+
 `-d --net slirp4netns:allow_host_loopback=true \`
+
 `--name webapp1 \`
+
 `-p 8000:80 \`
+
 `-p 4433:443 \`
+
 `-v /app:/var/www/localhost/htdocs:z \`
+
 `-v /php-config/php.ini:/usr/local/etc/php/conf.d/custom.ini:z  \`
+
 `-it --rm php-apache-alpine:latest`
