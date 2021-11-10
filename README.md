@@ -30,8 +30,8 @@ Example:
 
 `-p 4433:443 \`
 
-`-v /app:/var/www/localhost/htdocs:z \`
+`-v ./app:/var/www/localhost/htdocs:z \`
 
-`-v /php-config/php.ini:/usr/local/etc/php/conf.d/custom.ini:z  \`
+`-v ./php-config/php.ini:/usr/local/etc/php/conf.d/custom.ini:z  \`
 
 `-it --rm php-apache-alpine:latest`
